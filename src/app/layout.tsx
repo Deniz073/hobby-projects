@@ -11,6 +11,7 @@ import Link from 'next/link'
 import NavLink from './components/NavLinks/NavLink'
 import ResponsiveNavLink from './components/NavLinks/ResponsiveNavLink'
 import ResponsiveDropDownLink from './components/NavLinks/ResponsiveDropdownLink'
+import { Analytics } from '@vercel/analytics/react'
 
 const games = [
   { name: 'Color Memory', description: 'The classic color memory game', href: '/' },
@@ -187,6 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Dialog>
         </header>
         {children}
+        <Analytics />
       </body>
     </html>
   )
