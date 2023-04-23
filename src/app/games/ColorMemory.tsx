@@ -16,7 +16,7 @@ export default function ColorMemory() {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
-  const [highscore, setHighscore] = useState<string>(localStorage.getItem('highscore') ?? '0');
+  const [highscore, setHighscore] = useState<string>('0');
 
   const buttonRefs = {
     red: useRef<HTMLButtonElement>(null),
@@ -98,7 +98,8 @@ export default function ColorMemory() {
 
   useEffect(() => {
     addRandomStep(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setHighscore(localStorage.getItem('highscore') ?? '0');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
