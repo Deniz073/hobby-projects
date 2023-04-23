@@ -89,7 +89,7 @@ export default function Home() {
                       Moesland
                     </a>
                   </h3>
-                  <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                  <p className="mt-5 line-clamp-5 text-sm leading-6 text-gray-600">
                     The organization Moesland is a carnival organization in the Netherlands.
                     I was the lead developer in developing their mobile app and CMS using Laravel, React and React Native.
                   </p>
