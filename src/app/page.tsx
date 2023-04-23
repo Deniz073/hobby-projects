@@ -17,8 +17,8 @@ export default function Home() {
         />
       </div>
       <div className="mx-auto max-w-2xl pt-32 sm:pt-48 lg:pt-56 pb-24 sm:pb-40 lg:pb-44">
-        <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+        <div className="sm:mb-8 ml-12 mb-5  flex justify-center sm:w-auto w-60">
+          <div className="relative rounded-full px-3 justify-center align-middle sm:w-auto py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             My GitHub profile:{' '}
             <a href="https://github.com/Deniz073" target="_blank" className="font-semibold text-indigo-600">
               <span className="absolute inset-0" aria-hidden="true" />
