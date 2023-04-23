@@ -53,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }){
   }
 
   return (
-    <html lang="en" className='h-full' onClick={closeAllPanels}>
+    <html lang="en" className='h-full scroll-smooth' onClick={closeAllPanels}>
       <body className='h-full'>
         <header className="absolute inset-x-0 top-0 z-50 ">
           <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
