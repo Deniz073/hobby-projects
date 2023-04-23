@@ -14,7 +14,7 @@ import ResponsiveDropDownLink from './NavLinks/ResponsiveDropdownLink'
 import { Analytics } from '@vercel/analytics/react'
 
 const games = [
-  { name: 'Color Memory', description: 'The classic color memory game', href: '/' },
+  { name: 'Color Memory', description: 'The classic color memory game', href: '/games/color-memory' },
 ]
 
 const projects = [
@@ -55,7 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }){
   return (
     <html lang="en" className='h-full' onClick={closeAllPanels}>
       <body className='h-full'>
-        <header className="bg-white">
+        <header className="absolute inset-x-0 top-0 z-50">
           <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div className="flex lg:flex-1">
               <Link href="/" className='text-gray-950 font-semibold flex flex-col text-center' >

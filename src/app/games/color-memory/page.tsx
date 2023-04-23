@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import 'animate.css'
-import ColorMemoryButton from '../components/ColorMemoryButton';
+import ColorMemoryButton from '../../components/ColorMemoryButton';
 
 
 const STEP_VALUES = ['red', 'green', 'blue', 'yellow'];
