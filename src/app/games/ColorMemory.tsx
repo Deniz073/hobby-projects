@@ -16,6 +16,7 @@ export default function ColorMemory() {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [highscore, setHighscore] = useState<string>(localStorage.getItem('highscore') ?? '0');
 
   const buttonRefs = {
     red: useRef<HTMLButtonElement>(null),
@@ -50,6 +51,7 @@ export default function ColorMemory() {
     if (currentSteps.length === steps.length - 1) {
       if (localStorage.getItem('highscore') ?? '0' < steps.length.toString()) {
         localStorage.setItem('highscore', steps.length.toString());
+        setHighscore(steps.length.toString());
       }
 
       setTimeout(() => {
@@ -114,7 +116,7 @@ export default function ColorMemory() {
       }
       <button disabled={gameStarted} className='bg-blue-500 hover:bg-blue-700 disabled:opacity-30 text-white font-bold py-2 px-4 rounded mt-4' onClick={startGame}>Start</button>
       <div className="flex flex-row">
-        <p className="font-bold text-gray-700 mt-4 mr-4">Highscore: {localStorage.getItem('highscore') ?? '0'}</p>
+        <p className="font-bold text-gray-700 mt-4 mr-4">Highscore: {highscore}</p>
         <p className="font-bold text-gray-700 mt-4">Current round: {steps.length}</p>
       </div>
     </div>
