@@ -46,6 +46,7 @@ export default function Home() {
           <p className="mt-6 text-lg leading-8 text-gray-600">
             I am Deniz Erdem, a {getAge()} year old turkish software developer from the Netherlands.
             I am interested in all things software development related, but I am especially interested in back end stuff.
+            This is my personal website where I will be posting my hobby projects.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6 mb-5">
             <a href="#realLifeProjects" className="text-sm font-semibold leading-6 text-gray-900">
