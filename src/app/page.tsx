@@ -4,6 +4,17 @@ import WorkExperience from "./components/WorkExperience"
 
 export default function Home() {
 
+  function getAge(): number{
+    const today = new Date()
+    const birthDate = new Date('2002-09-15')
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const m = today.getMonth() - birthDate.getMonth()
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--
+    }
+    return age
+  }
+
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
@@ -33,7 +44,7 @@ export default function Home() {
             My personal website for hobby projects
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            I am Deniz Erdem, a {new Date().getFullYear() - 2002} year old turkish software developer from the Netherlands.
+            I am Deniz Erdem, a {getAge()} year old turkish software developer from the Netherlands.
             I am interested in all things software development related, but I am especially interested in back end stuff.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6 mb-5">
