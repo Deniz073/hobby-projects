@@ -14,7 +14,7 @@ export default function WorkExperience() {
         {data.map((item, index) => (
           <li key={index} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image alt="livewall logo" width="28" height="28" className="h-7 w-7" src={item.logo} />
+              <Image title="LiveWall Logo" loading="eager" alt="livewall logo" width="28" height="28" className="h-7 w-7" src={item.logo} />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
@@ -35,7 +35,7 @@ export default function WorkExperience() {
         href="/deniz-erdem-cv.pdf" download={true}>
         Download CV
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50">
-          <path d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5" stroke-width="1.5" stroke-linecap="round" strokeLinejoin="round">
+          <path d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           </path>
         </svg>
       </a>

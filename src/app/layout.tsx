@@ -1,34 +1,40 @@
 import './globals.css'
 import Layout from './components/Layout'
 
-const games = [
-  { name: 'Color Memory', description: 'The classic color memory game', href: '/' },
-]
-
-const projects = [
-  { name: 'Make a choice', description: 'To help you make a choice', href: '/make-a-choice' },
-]
-
-const dropdowns = [
-  { name: 'Games', items: games, showPanel: false },
-  { name: 'Projects', items: projects, showPanel: false }
-]
-
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
-
 export const metadata = {
   title: 'Hobby projects',
   description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
-  themeColor: "#4285f4" 
+  themeColor: "#f6f4fd",
+  openGraph: {
+    title: 'Hobby projects by Deniz Erdem',
+    type: 'website',
+    description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+    images: [
+      { url: '/images/og-image.jpg' }
+    ],
+    url: 'https://deniz-hobby-projects.nl/',
+    countryName: 'Netherlands',
+    siteName: 'Hobby projects',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hobby projects by Deniz Erdem',
+    description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+    images: [
+      { url: '/images/og-image.jpg' }
+    ],
+  },
+  appleWebApp: {
+    title: 'Hobby projects by Deniz Erdem',
+    startupImage: '/images/og-image.jpg',
+    capable: true,
+    statusBarStyle: 'black-translucent',
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // eslint-disable-next-line react/no-children-prop
-    <Layout children={children} />
+    <Layout>{children}</Layout>
   )
 }
