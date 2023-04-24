@@ -37,7 +37,7 @@ export default function ColorMemory() {
     if (!ref) return;
 
     handleAnimation(ref)
-    new Audio(`./sounds/${color}.mp3`).play();
+    new Audio(`/sounds/${color}.mp3`).play();
 
     if (color !== steps[currentSteps.length]) {
       setGameOver(true);
@@ -61,7 +61,7 @@ export default function ColorMemory() {
     }
   };
 
-  const addRandomStep = (gameOver: boolean) => {
+  const addRandomStep = (gameOver: boolean, playSound?: boolean) => {
     const randomStep = STEP_VALUES[Math.floor(Math.random() * STEP_VALUES.length)] as Color;
     const newSteps = gameOver ? [randomStep] : [...steps, randomStep];
     setSteps(newSteps);
@@ -74,7 +74,7 @@ export default function ColorMemory() {
 
         setTimeout(() => {
           handleAnimation(ref);
-          new Audio(`./sounds/${step}.mp3`).play();
+          if(playSound) new Audio(`/sounds/${step}.mp3`).play();
         }, index * STEP_DELAY_MS);
       });
 
@@ -91,13 +91,13 @@ export default function ColorMemory() {
       const ref = buttonRefs[steps[0]];
       if (ref) {
         handleAnimation(ref);
-        new Audio(`./sounds/${steps[0]}.mp3`).play();
+        new Audio(`/sounds/${steps[0]}.mp3`).play();
       }
     }
   };
 
   useEffect(() => {
-    addRandomStep(false);
+    addRandomStep(false, false);
     setHighscore(localStorage.getItem('highscore') ?? '0');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
