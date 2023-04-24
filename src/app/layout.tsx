@@ -2,9 +2,15 @@ import './globals.css'
 import Layout from './components/Layout'
 
 export const metadata = {
-  title: 'Hobby projects',
-  description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+  title: 'Hobby projects by Deniz Erdem ',
+  applicationName: 'Hobby projects and portfolio of Deniz Erdem',
+  description: 'Hobby projects and portfolio site created by Deniz Erdem: github.com/Deniz073',
+  authors: [{ name: 'Deniz Erdem', url: 'github.com/Deniz073' }],
+  category: 'Portfolio',
+  keywords: "portfolio, hobby projects, react, nextjs, nextjs13",
+  colorScheme: "light",
   themeColor: "#f6f4fd",
+  icons: '/images/nextjs-logo.png',
   openGraph: {
     title: 'Hobby projects by Deniz Erdem',
     type: 'website',
