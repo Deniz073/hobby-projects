@@ -51,7 +51,7 @@ export default function Home() {
             <a href="#realLifeProjects" className="text-sm font-semibold leading-6 text-gray-900">
               Real life projects <span aria-hidden="true">↓</span>
             </a>
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            <a href="https://deniz-erdem-cv.tiiny.site/" target="_blank" rel="no-refferer" className="text-sm font-semibold leading-6 text-gray-900">
               My Curriculum Vitae <span aria-hidden="true">→</span>
             </a>
           </div>
