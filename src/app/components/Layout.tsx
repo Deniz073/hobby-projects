@@ -56,6 +56,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en" className='h-full scroll-smooth' onClick={closeAllPanels}>
       <head>
         <link rel='canonical' href='https://deniz-hobby-projects.nl' />
+        <link rel="apple-touch-icon" href="/images/og-image.jpg" />
       </head>
       <body className='h-full'>
         <header className="absolute inset-x-0 top-0 z-50 ">

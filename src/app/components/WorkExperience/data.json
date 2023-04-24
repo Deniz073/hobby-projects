@@ -5,5 +5,12 @@
     "dateFrom": "2022-08",
     "dateTo": "2023-01",
     "logo": "/images/livewall.jpg"
+  },
+  {
+    "company": "Avans University of Applied Sciences",
+    "role": "Student",
+    "dateFrom": "2020",
+    "dateTo": "2024",
+    "logo": "/images/avans-logo.png"
   }
 ]
