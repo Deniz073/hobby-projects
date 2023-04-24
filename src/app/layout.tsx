@@ -23,6 +23,7 @@ function classNames(...classes: string[]) {
 export const metadata = {
   title: 'Hobby projects',
   description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+  themeColor: "#4285f4" 
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
