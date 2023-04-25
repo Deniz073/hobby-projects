@@ -12,6 +12,7 @@ import NavLink from './NavLinks/NavLink'
 import ResponsiveNavLink from './NavLinks/ResponsiveNavLink'
 import ResponsiveDropDownLink from './NavLinks/ResponsiveDropdownLink'
 import { Analytics } from '@vercel/analytics/react'
+import { useAuth } from '@/hooks/auth'
 
 const games = [
   { name: 'Color Memory', description: 'The classic color memory game', href: '/games/color-memory' },
@@ -34,6 +35,9 @@ function classNames(...classes: string[]) {
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showPanel, setShowPanel] = useState(dropdowns)
+  const { user, logout } = useAuth({
+    middleware: 'auth',
+  })
 
   const handlePanelVisibility = (index: number, visibility: boolean) => {
     const newShowPanel = [...showPanel]
@@ -50,6 +54,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       item.showPanel = false
     })
     setShowPanel(newShowPanel)
+  }
+
+  function onLogOut() {
+    logout()
   }
 
   return (
@@ -120,9 +128,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             </Popover.Group>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <Link href="/auth/login" className="text-sm font-semibold leading-6 text-gray-900">
-                Log in <span aria-hidden="true">&rarr;</span>
-              </Link>
+              {
+                user ? (
+                    <button onClick={ () => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Log out</button>
+                ) : (
+                  <Link href="/auth/login" className="text-sm font-semibold leading-6 text-gray-900">
+                    Sign in <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                )
+              }
+
             </div>
           </nav>
           <Dialog as="div" className="lg:hidden z-50" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
