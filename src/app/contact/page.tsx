@@ -47,22 +47,27 @@ export default function Contact() {
 
     setProcessing(true)
 
-    emailjs.sendForm('service_qaqgbu9', 'template_54c16of', form.current as string | HTMLFormElement, 'QpBAnAn6s4B5pDR_4')
-      .then(() => {
-        toast.success('Message sent successfully!')
-        setFormData({
-          first_name: '',
-          last_name: '',
-          company: '',
-          email: '',
-          phone_number: '',
-          message: '',
-        })
-        setProcessing(false)
-      }, () => {
-        toast.error('Something went wrong, please try again later.')
-        setProcessing(false)
-      });
+    emailjs.sendForm(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      form.current as string | HTMLFormElement,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+    ).then(() => {
+      toast.success('Message sent successfully!')
+      setFormData({
+        first_name: '',
+        last_name: '',
+        company: '',
+        email: '',
+        phone_number: '',
+        message: '',
+      })
+      setProcessing(false)
+    }, () => {
+      toast.error('Something went wrong, please try again later.')
+      setProcessing(false)
+    });
   };
 
   return (
