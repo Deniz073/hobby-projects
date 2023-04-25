@@ -130,7 +130,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               {
                 user ? (
-                    <button onClick={ () => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Log out</button>
+                  <button onClick={() => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
                 ) : (
                   <Link href="/auth/login" className="text-sm font-semibold leading-6 text-gray-900">
                     Sign in <span aria-hidden="true">&rarr;</span>
@@ -189,11 +189,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     />
                   </div>
                   <div className="py-6">
-                    <ResponsiveNavLink
-                      onClick={() => setMobileMenuOpen(false)}
-                      href="/auth/login"
-                      name="Log In"
-                    />
+                    {
+                      user ? (
+                        <button onClick={() => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
+                      ) : (
+                          <ResponsiveNavLink
+                            onClick={() => setMobileMenuOpen(false)}
+                            href="/auth/login"
+                            name="Sign In &rarr;"
+                          />
+                      )
+                    }
                   </div>
                 </div>
               </div>
