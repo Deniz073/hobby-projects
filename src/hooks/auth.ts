@@ -11,7 +11,7 @@ type User = {
 }
 
 type AuthHook = {
-  user: User | undefined | void,
+  user: User | undefined | { user: User } | void,
   register: (params: any) => Promise<void>,
   login: (params: any) => Promise<void>,
   logout: () => Promise<void>,
