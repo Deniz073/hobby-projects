@@ -19,10 +19,8 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
   }
 
   useEffect(() => {
-    const handler = (e: MouseEvent | TouchEvent) => {
-      e.preventDefault()
+    const handler = (e: MouseEvent) => {
       if (!mouseDown) return
-
       const currentPoint = computePointInCanvas(e)
 
       const ctx = canvasRef.current?.getContext('2d')
@@ -32,19 +30,13 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
       prevPoint.current = currentPoint
     }
 
-    const computePointInCanvas = (e: MouseEvent | TouchEvent) => {
+    const computePointInCanvas = (e: MouseEvent) => {
       const canvas = canvasRef.current
       if (!canvas) return
 
       const rect = canvas.getBoundingClientRect()
-      let x, y;
-      if (e instanceof MouseEvent) {
-        x = e.clientX - rect.left
-        y = e.clientY - rect.top
-      } else if (e instanceof TouchEvent) {
-        x = e.touches[0].clientX - rect.left
-        y = e.touches[0].clientY - rect.top
-      }
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
 
       return { x, y }
     }
@@ -55,21 +47,13 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
     }
 
     // Add event listeners
-    canvasRef.current?.addEventListener('mousedown', onMouseDown)
     canvasRef.current?.addEventListener('mousemove', handler)
-    canvasRef.current?.addEventListener('touchstart', onMouseDown)
-    canvasRef.current?.addEventListener('touchmove', handler)
     window.addEventListener('mouseup', mouseUpHandler)
-    window.addEventListener('touchend', mouseUpHandler)
 
     // Remove event listeners
     return () => {
-      canvasRef.current?.removeEventListener('mousedown', onMouseDown)
       canvasRef.current?.removeEventListener('mousemove', handler)
-      canvasRef.current?.removeEventListener('touchstart', onMouseDown)
-      canvasRef.current?.removeEventListener('touchmove', handler)
       window.removeEventListener('mouseup', mouseUpHandler)
-      window.removeEventListener('touchend', mouseUpHandler)
     }
   }, [onDraw])
 

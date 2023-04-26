@@ -15,7 +15,7 @@ export default function Draw() {
   }
 
   return (
-    <div className='min-h-screen mt-14 sm:mt-0 flex flex-col lg:flex-row justify-center items-center'>
+    <div className='w-screen h-screen flex justify-center items-center'>
       <div className='flex flex-col gap-5 pr-10'>
         <ChromePicker color={color} onChange={(e) => setColor(e.hex)} />
         <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
@@ -37,10 +37,10 @@ export default function Draw() {
       <canvas
         ref={canvasRef}
         onMouseDown={onMouseDown}
-        onTouchStart={onMouseDown}
-        onTouchMove={onMouseDown}
+        width={750}
+        height={750}
         style={{ borderRadius: `${borderRadius}px` }}
-        className='border bg-white mt-4 sm:mt-0 w-[350px] h-[350px] sm:w-[725px] sm:h-[725px] border-black lg:ml-5 flex-grow-1'
+        className='border bg-white border-black'
       />
     </div>
   )

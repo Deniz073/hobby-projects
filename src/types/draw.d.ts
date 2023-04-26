@@ -4,4 +4,4 @@ type Draw = {
   prevPoint: Point | null
 }
 
-type Point = { x: number | undefined; y: number | undefined}
+type Point = { x: number; y: number }
