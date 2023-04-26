@@ -1,6 +1,6 @@
 export default function Chat() {
   return (
-    <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col max-h-[80vh] mx-auto max-w-[100vh]">
+    <div className="flex-1 p:2 sm:p-6 justify-between overflow-auto flex flex-col min-h-screen mx-auto max-w-[100vh]">
       <div className="flex sm:items-center text-center justify-center py-3 border-b-2 border-gray-200">
         <h2 className=" font-semibold">Chat app with socket.io</h2>
       </div>
