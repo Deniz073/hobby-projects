@@ -19,7 +19,9 @@ const games = [
 ]
 
 const projects = [
-  { name: 'Make a choice', description: 'To help you make a choice', href: '/make-a-choice' },
+  { name: 'Make a choice', description: 'To help you make a choice', href: '/projects/make-a-choice' },
+  { name: 'Draw', description: 'Draw something beautiful', href: '/projects/draw' },
+  { name: 'Chat app', description: 'Chat app using socket.io', href: '/projects/chat' },
 ]
 
 const dropdowns = [
@@ -108,15 +110,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <Popover.Panel className="absolute -left-8  z-50 mt-3 w-screen max-w-xs overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                         <div className="p-4">
                           {dropdown.items.map((item) => (
-                            <Link
-                              onClick={() => handlePanelVisibility(index, false)}
+                            <div
                               key={item.name}
-                              href={item.href}>
-                              {item.name}
-                            </Link>
-
+                              className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                            >
+                              <div className="flex-auto">
+                                <Link
+                                  onClick={() => handlePanelVisibility(index, false)}
+                                  key={item.name}
+                                  href={item.href}>
+                                  {item.name}
+                                  <span className="absolute inset-0" />
+                                </Link>
+                              </div>
+                            </div>
                           ))}
                         </div>
+
 
                       </Popover.Panel>
                     </Transition>
@@ -130,7 +140,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               {
                 user ? (
-                    <button onClick={ () => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Log out</button>
+                  <button onClick={() => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
                 ) : (
                   <Link href="/auth/login" className="text-sm font-semibold leading-6 text-gray-900">
                     Sign in <span aria-hidden="true">&rarr;</span>
@@ -190,11 +200,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     />
                   </div>
                   <div className="py-6">
-                    <ResponsiveNavLink
-                      onClick={() => setMobileMenuOpen(false)}
-                      href="/auth/login"
-                      name="Log In"
-                    />
+                    {
+                      user ? (
+                        <button onClick={() => onLogOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
+                      ) : (
+                        <ResponsiveNavLink
+                          onClick={() => setMobileMenuOpen(false)}
+                          href="/auth/login"
+                          name="Sign In &rarr;"
+                        />
+                      )
+                    }
                   </div>
                 </div>
               </div>
