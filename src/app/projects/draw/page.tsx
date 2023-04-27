@@ -8,7 +8,7 @@ import { drawLine } from '@/utils/draw/drawLine'
 export default function Draw() {
   const [color, setColor] = useState<string>('#000')
   const [borderRadius, setBorderRadius] = useState<number>(6)
-  const { canvasRef, onMouseDown, clear } = useDraw(createLine)
+  const { canvasRef, onMouseDown, clear, downloadCanvas } = useDraw(createLine)
 
   function createLine({ prevPoint, currentPoint, ctx }: Draw) {
     drawLine({ prevPoint, currentPoint, ctx, color })
@@ -30,9 +30,15 @@ export default function Draw() {
           />
           <button
             type='button'
-            className='p-2 rounded-md border border-black'
+            className='p-2 rounded-md border bg-red-500 text-white border-black'
             onClick={() => clear()}>
             Clear canvas
+          </button>
+          <button
+            type='button'
+            className='p-2 rounded-md border border-black'
+            onClick={() => downloadCanvas()}>
+            Download drawing
           </button>
         </div>
         <canvas

@@ -18,6 +18,33 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   }
 
+  const downloadCanvas = () => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+
+    let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
+
+    const createEl = document.createElement('a');
+    createEl.href = canvasUrl;
+    createEl.download = "your-drawing";
+    createEl.click();
+    createEl.remove();
+  }
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    //set background color to white
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  }, [])
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!mouseDown) return
@@ -57,5 +84,5 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
     }
   }, [onDraw])
 
-  return { canvasRef, onMouseDown, clear }
+  return { canvasRef, onMouseDown, clear, downloadCanvas }
 }
