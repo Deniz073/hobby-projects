@@ -196,6 +196,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <ResponsiveNavLink
                       href="/contact"
                       name="Contact"
+                      onClick={() => setMobileMenuOpen(false)}
                     />
                   </div>
                   <div className="py-6">
