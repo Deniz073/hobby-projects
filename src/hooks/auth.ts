@@ -89,6 +89,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthProps): 
   }, [])
 
 
+
   return {
     user,
     register,
