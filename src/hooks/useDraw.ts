@@ -39,10 +39,8 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    //set background color to white
     ctx.fillStyle = 'white'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-
   }, [])
 
   useEffect(() => {
