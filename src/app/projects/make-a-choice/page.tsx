@@ -46,9 +46,9 @@ export default function Page() {
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center px-4 md:px-0">
-      <div className="border border-gray-300 rounded-md overflow-y-auto mb-8 md:mb-0">
+      <div className="border border-gray-300 rounded-md overflow-y-auto mb-8 md:mb-0 mt-10 sm:mt-0">
         <h2 className="text-2xl font-bold px-4 py-2 border-b border-gray-300">Available choices:</h2>
-        <ul role="list" className="divide-y divide-gray-200">
+        <ul role="list" className="divide-y max-h-[20vh] sm:max-h-[70vh] divide-gray-200">
           {choices.map((choice) => (
             <li key={choice} className="px-4 py-2 flex justify-between items-center">
               <p className="text-sm font-semibold leading-6 text-gray-900">{choice}</p>
