@@ -60,8 +60,8 @@ export const useDraw = (onDraw: ({ ctx, currentPoint, prevPoint }: Draw) => void
       if (!canvas) return
 
       const rect = canvas.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
+      const x = e.clientX - rect.left + 10
+      const y = e.clientY - rect.top + 10
 
       return { x, y }
     }
