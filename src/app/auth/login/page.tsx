@@ -15,9 +15,11 @@ export default function Login() {
   const [shouldRemember, setShouldRemember] = useState(false)
   const [errors, setErrors] = useState({ email: '' })
   const [status, setStatus] = useState<any>(null)
+  const [processing, setProcessing] = useState(false)
 
   function submitForm(e: FormEvent) {
     e.preventDefault()
+    setProcessing(true)
 
     login({
       email,
@@ -25,9 +27,9 @@ export default function Login() {
       remember: shouldRemember,
       setErrors,
       setStatus,
-    }).catch((e) => {
-      console.log(e)
-    })
+    }).then(() => setProcessing(false))
+      .catch(() => setProcessing(false))
+
   }
 
   return (
@@ -87,7 +89,8 @@ export default function Login() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                disabled={processing}
+                className="flex disabled:cursor-wait disabled:opacity-50 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
               </button>
