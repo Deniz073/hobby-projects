@@ -59,7 +59,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthProps): 
 
     axios
       .post('/login', props)
-      .then(() => mutate())
+      .then(() => {
+        mutate()
+        window.location.pathname = '/'
+      })
       .catch(error => {
         console.log(error)
         if (error.response?.status !== 422) throw error
@@ -77,13 +80,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: UseAuthProps): 
   }
 
 
-useEffect(() => {
-  if (middleware === 'guest' && redirectIfAuthenticated && user)
-    router.push(redirectIfAuthenticated)
+  useEffect(() => {
+    if (middleware === 'guest' && redirectIfAuthenticated && user)
+      router.push(redirectIfAuthenticated)
 
-  //if (middleware === 'auth' && error) logout()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [])
+    if (middleware === 'auth' && error) logout()
+
+  }, [])
+
 
 
   return {
