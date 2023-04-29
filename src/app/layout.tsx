@@ -1,5 +1,5 @@
 import './globals.css'
-import Layout from './components/Layout'
+import Layout from './components/Layout/Layout'
 
 export const metadata = {
   title: 'Hobby projects by Deniz Erdem ',

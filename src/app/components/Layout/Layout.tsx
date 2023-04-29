@@ -8,11 +8,12 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-import NavLink from './NavLinks/NavLink'
-import ResponsiveNavLink from './NavLinks/ResponsiveNavLink'
-import ResponsiveDropDownLink from './NavLinks/ResponsiveDropdownLink'
+import NavLink from '../NavLinks/NavLink'
+import ResponsiveNavLink from '../NavLinks/ResponsiveNavLink'
+import ResponsiveDropDownLink from '../NavLinks/ResponsiveDropdownLink'
 import { Analytics } from '@vercel/analytics/react'
 import { useAuth } from '@/hooks/auth'
+import Footer from './Footer'
 
 const games = [
   { name: 'Color Memory', description: 'The classic color memory game', href: '/games/color-memory' },
@@ -231,6 +232,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             />
           </div>
           {children}
+
+          <Footer />
+
           <div
             className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
             aria-hidden="true"
@@ -244,6 +248,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             />
           </div>
         </div>
+
         <Analytics />
       </body>
     </html>
