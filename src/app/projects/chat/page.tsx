@@ -37,9 +37,9 @@ export default function Chat() {
 
   useAsyncEffect(async () => {
 
-    // setUser({
-    //   name: prompt("What is your name?", "Harry Potter") as string
-    // })
+    setUser({
+      name: prompt("What is your name?", "My name") as string
+    })
 
     const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);
     await ably.connection.once('connected');
