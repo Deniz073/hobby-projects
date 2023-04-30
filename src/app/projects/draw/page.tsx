@@ -26,13 +26,13 @@ export default function Draw() {
           <button
             type='button'
             className='p-2 rounded-md border bg-red-500 text-white border-black'
-            onClick={() => clear()}>
+            onClick={clear}>
             Clear canvas
           </button>
           <button
             type='button'
             className='p-2 rounded-md border border-black'
-            onClick={() => downloadCanvas()}>
+            onClick={downloadCanvas}>
             Download drawing
           </button>
         </div>

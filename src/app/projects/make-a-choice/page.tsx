@@ -14,10 +14,10 @@ export default function Page() {
     if (!validateInput()) return;
     setChoices([...choices, choiceInput.current.value])
     choiceInput.current.value = ''
+    choiceInput.current.focus()
   }
 
   function removeLastChoice() {
-
     setChoices(choices.slice(0, choices.length - 1))
   }
 
