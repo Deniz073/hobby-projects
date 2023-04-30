@@ -1,10 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import { io } from "socket.io-client"
-
-const socket = io("https://hobby-projects-server.vercel.app")
+import { useState } from "react"
+import useAsyncEffect from "@/hooks/useAsyncEffect"
+import Ably from "ably"
 
 interface User {
   name: string
@@ -20,6 +19,7 @@ interface ChatProps {
 }
 
 export default function Chat() {
+  const [channel, setChannel] = useState<any>(null)
   const [messages, setMessages] = useState<ChatProps>({
     messages: [],
   })
@@ -29,41 +29,32 @@ export default function Chat() {
   })
 
   function sendMessage() {
-    socket.emit("send-message", {
-      user: user,
-      message: message,
-    })
+
+    channel.publish('message', { user: user, message: message });
+    setMessage("")
   }
 
 
-  useEffect(() => {
+  useAsyncEffect(async () => {
 
     setUser({
       name: prompt("What is your name?", "Harry Potter") as string
     })
 
-    socket.on("connect", () => {
-      console.log("connected")
-    })
-    socket.on("disconnect", () => {
-      console.log("disconnected")
-    })
+    const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);
+    await ably.connection.once('connected');
+    console.log('Connected to Ably!');
 
-    socket.on("receive-message", ({ user, message }) => {
-      console.log(user.name, message)
-      console.log('message received')
+    const channel = ably.channels.get('chat');
 
-      setMessages((prevState) => ({
-        messages: [...prevState.messages, { user, message }],
+    channel.subscribe('message', (message: any) => {
+      console.log('message received', message)
+      setMessages(prevState => ({
+        messages: [...prevState.messages, message.data]
       }))
+    });
 
-    })
-
-    return () => {
-      socket.off("connect")
-      socket.off("disconnect")
-      socket.off("receive-message")
-    }
+    setChannel(channel)
 
   }, [])
 
@@ -76,30 +67,25 @@ export default function Chat() {
       <div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
 
         {messages.messages.map((message, index) => (
-          <>
-            {
-              message.user.name !== user.name ? (
-                <div key={index} className="chat-message">
-                  <div className="flex items-end">
-                    <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                      <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{message.message}</span></div>
-                    </div>
-                    <Image width={30} height={30} src="/images/nextjs-logo.png" alt="My profile" className="w-6 h-6 rounded-full order-1" />
-                  </div>
+          message.user.name !== user.name ? (
+            <div key={index} className="chat-message">
+              <div className="flex items-end">
+                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                  <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{message.message}</span></div>
                 </div>
-              ) : (
-                  <div className="chat-message">
-                    <div className="flex items-end justify-end">
-                      <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                        <div><span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">{message.message}</span></div>
-                      </div>
-                      <Image width={30} height={30} src="/images/nextjs-logo.png" alt="My profile" className="w-6 h-6 rounded-full order-2" />
-                    </div>
-                  </div>
-              )
-            }
-          </>
-
+                <Image width={30} height={30} src="/images/nextjs-logo.png" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+              </div>
+            </div>
+          ) : (
+            <div key={index} className="chat-message">
+              <div className="flex items-end justify-end">
+                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                  <div><span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">{message.message}</span></div>
+                </div>
+                <Image width={30} height={30} src="/images/nextjs-logo.png" alt="My profile" className="w-6 h-6 rounded-full order-2" />
+              </div>
+            </div>
+          )
         ))}
       </div>
       <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
