@@ -11,12 +11,12 @@ export const drawLine = ({ prevPoint, currentPoint, ctx, color }: DrawLineProps)
   ctx.beginPath()
   ctx.lineWidth = lineWidth
   ctx.strokeStyle = lineColor
-  ctx.moveTo(startPoint.x as number, startPoint.y as number)
-  ctx.lineTo(currX as number, currY as number)
+  ctx.moveTo(startPoint.x, startPoint.y)
+  ctx.lineTo(currX, currY)
   ctx.stroke()
 
   ctx.fillStyle = lineColor
   ctx.beginPath()
-  ctx.arc(startPoint.x as number, startPoint.y as number, 2, 0, 2 * Math.PI)
+  ctx.arc(startPoint.x, startPoint.y, 2, 0, 2 * Math.PI)
   ctx.fill()
 }
