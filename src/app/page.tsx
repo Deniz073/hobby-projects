@@ -1,5 +1,5 @@
 import LandingPageHeader from "./components/LandingPageHeader"
-import RealLifeProjects from "./components/RealLifeProjects"
+import RealLifeProjects from "./components/RealLifeProjects/RealLifeProjects"
 import Testimonials from "./components/Testimonials/Testimonials"
 import WorkExperience from "./components/WorkExperience/WorkExperience"
 
