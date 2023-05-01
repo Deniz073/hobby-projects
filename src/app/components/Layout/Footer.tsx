@@ -8,6 +8,7 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from 'next-share';
+import Link from 'next/link';
 
 const WEBSITE_URL = "https://deniz-hobby-projects.nl/"
 
@@ -71,9 +72,9 @@ export default function Footer() {
           <div className="flex items-center justify-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <span>
               © {new Date().getFullYear()}{' '}
-              <a href="https://flowbite.com/" className="hover:underline">
+              <Link href="/contact" className="hover:underline">
                 Deniz Erdem.{' '}
-              </a>
+              </Link>
               All Rights Reserved.
             </span>
           </div>
