@@ -1,6 +1,8 @@
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   margin: 1.5 * 7 auto;
   gap: 1.5;
 }
