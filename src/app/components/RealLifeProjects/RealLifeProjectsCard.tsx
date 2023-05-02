@@ -1,3 +1,6 @@
+"use client"
+import { motion } from "framer-motion";
+import { fadeIn } from "@/framerAnimations";
 
 interface Props {
   title: string;
@@ -11,8 +14,8 @@ interface Props {
 
 export default function RealLifeProjectsCard({ title, description, role, date, dateDisplay, tags }: Props) {
   return (
-    <article className="max-w-sm w-full lg:max-w-full lg:flex">
-      <div className="shadow-xl shadow-slate-950/10 rounded-2xl bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <motion.article {...fadeIn} className="max-w-sm w-full lg:max-w-full lg:flex">
+      <motion.div whileHover={{ scale: 1.1 }} className="shadow-xl shadow-slate-950/10 rounded-2xl bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
         <div className="mb-8">
           <time dateTime={date} className="text-gray-500 text-sm mt-2">
             {dateDisplay}
@@ -39,7 +42,7 @@ export default function RealLifeProjectsCard({ title, description, role, date, d
 
           </div>
         </div>
-      </div>
-    </article>
+      </motion.div>
+    </motion.article>
   )
 }

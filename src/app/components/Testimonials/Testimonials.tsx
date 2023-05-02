@@ -1,3 +1,5 @@
+"use client"
+
 import TestimonialCard from "./TestimonialCard"
 import data from "./data.json"
 
