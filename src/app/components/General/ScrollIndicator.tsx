@@ -11,6 +11,6 @@ export default function ScrollIndicator() {
   });
 
   return (
-    <motion.div className="fixed top-0 left-0 right-0 h-2 bg-blue-200 rounded-full" style={{ scaleX, transformOrigin: "0%" }} />
+    <motion.div className="fixed top-0 left-0 right-0 h-2 bg-blue-200 rounded-full z-50" style={{ scaleX, transformOrigin: "0%" }} />
   )
 }

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Memory.module.scss';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 type Card = string;
 
@@ -80,19 +81,19 @@ function Memory() {
               key={index}
               onClick={() => isClickable && chooseCard(index)}
             >
-              <div
+              <motion.div
+                animate={{ transform: isChosen || isFound ? 'rotateY(180deg)' : 'rotateY(0deg)', transformStyle: 'preserve-3d' }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
                 className={classNames({
-                  [styles['card__backface']]: true,
-                  [styles['card__backface--chosen']]: isChosen,
-                  [styles['card__backface--found']]: isFound
+                  [styles['card__backface']]: true
                 })}
               />
 
-              <div
+              <motion.div
+                animate={{ transform: isChosen || isFound ? 'rotateY(0deg)' : 'rotateY(180deg)', transformStyle: 'preserve-3d' }}
+                transition={{ duration: 0.2, ease: 'easeInOut'  }}
                 className={classNames({
                   [styles['card__icon-container']]: true,
-                  [styles['card__icon-container--chosen']]: isChosen,
-                  [styles['card__icon-container--found']]: isFound,
                   [styles['card__icon-container--board-complete']]: isComplete
                 })}
               >
@@ -103,7 +104,7 @@ function Memory() {
                 >
                   {card}
                 </div>
-              </div>
+              </motion.div>
             </div>
           );
         })}
