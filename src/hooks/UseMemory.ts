@@ -72,7 +72,6 @@ export function useMemory(): MemoryHook {
   }, [foundCards]);
 
   return {
-    currentGameStatus,
     attemptedMoves,
     isComplete,
     board,
