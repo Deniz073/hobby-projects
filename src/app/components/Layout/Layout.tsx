@@ -121,15 +121,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                   onClick={() => handlePanelVisibility(index, false)}
                                   key={item.name}
                                   href={item.href}>
-                                  {item.name}
+                                  <div className="flex flex-col">
+                                    <p className='font-bold'>{item.name}</p>
+                                    <small className='text-gray-400'>{item.description}</small>
+                                  </div>
                                   <span className="absolute inset-0" />
                                 </Link>
                               </div>
                             </div>
                           ))}
                         </div>
-
-
                       </Popover.Panel>
                     </Transition>
                   </Popover>
@@ -186,8 +187,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                   onClick={() => setMobileMenuOpen(false)}
                                   key={item.name}
                                   href={item.href}
-                                  name={item.name}
-                                />
+                                >
+                                  <div className="flex flex-col">
+                                    <p className='font-bold'>{item.name}</p>
+                                    <small className='text-gray-400'>{item.description}</small>
+                                  </div>
+                                </ResponsiveDropDownLink>
                               ))}
                             </Disclosure.Panel>
                           </>
