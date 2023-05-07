@@ -14,7 +14,7 @@ export default function Home() {
         <WorkExperience />
       </div>
       <RealLifeProjects />
-      {/* <Testimonials /> */}
+      <Testimonials />
       
     </>
   )
