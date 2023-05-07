@@ -9,7 +9,6 @@ import { motion } from 'framer-motion';
 function Memory() {
   const { isComplete, board, chosenCards, foundCards, attemptedMoves, chooseCard } = useMemory();
 
-
   return (
     <div className="max-w-[80vh] max-h-[80vh] mx-auto mt-36">
       <h1 className="text-2xl md:text-4xl font-bold text-center mb-2">Classic Memory Game</h1>
