@@ -17,6 +17,7 @@ import Footer from './Footer'
 
 const games = [
   { name: 'Color Memory', description: 'The classic color memory game', href: '/games/color-memory' },
+  { name: 'Classic Memory', description: 'The classic memory game', href: '/games/memory' },
 ]
 
 const projects = [

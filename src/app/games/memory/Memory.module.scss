@@ -1,0 +1,67 @@
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  margin: 1.5 * 7 auto;
+  gap: 1.5;
+}
+
+.card {
+  position: relative;
+  color: gray;
+  user-select: none;
+  height: 0;
+  padding-top: 100%;
+  cursor: pointer;
+  
+  
+  &__icon-container {
+    box-shadow: 0pt 3pt 6pt #00000029;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    border-radius: 16px;
+    overflow: hidden;
+    
+    &--board-complete {
+      background: green;
+    }
+  }
+  
+  &__icon {
+    font-size: 40px !important;
+    
+    &--completed {
+      color: white
+    }
+  }
+  
+  &__backface {
+    box-shadow: 0pt 3pt 6pt #00000029;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: gray;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    
+    border-radius: 16px;
+    overflow: hidden;
+  }
+}

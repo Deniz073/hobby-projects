@@ -1,17 +1,6 @@
-import React from 'react'
+import HeaderText from './HeaderText'
 
 export default function LandingPageHeader() {
-
-  function getAge(): number {
-    const today = new Date()
-    const birthDate = new Date('2002-09-15')
-    let age = today.getFullYear() - birthDate.getFullYear()
-    const m = today.getMonth() - birthDate.getMonth()
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--
-    }
-    return age
-  }
 
   return (
     <>
@@ -28,11 +17,7 @@ export default function LandingPageHeader() {
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
           My personal website for hobby projects
         </h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          I am Deniz Erdem, a {getAge()} year old turkish software developer from the Netherlands.
-          I am interested in all things software development related, but I am especially interested in back end stuff.
-          This is my personal website where I will be posting my hobby projects.
-        </p>
+        <HeaderText />
         <div className="mt-10 flex items-center justify-center gap-x-6 mb-5">
           <a href="#realLifeProjects" className="text-sm font-semibold leading-6 text-gray-900">
             Real life projects <span aria-hidden="true">↓</span>

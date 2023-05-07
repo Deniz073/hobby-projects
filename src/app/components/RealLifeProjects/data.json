@@ -9,5 +9,15 @@
       "Web development",
       "Mobile development"
     ]
+  },
+  {
+    "title": "Duketown Barbershop Singers",
+    "description": "The Duketown Barbershop Singers is a barbershop choir in the Netherlands. I was a full stack developer creating their website and CMS using Laravel",
+    "date": "2022-02-01",
+    "dateDisplay": "February 2022",
+    "role": "Fullstack developer",
+    "tags": [
+      "Web development"
+    ]
   }
 ]
