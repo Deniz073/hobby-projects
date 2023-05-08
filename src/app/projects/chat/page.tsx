@@ -1,6 +1,7 @@
 "use client"
 
-import Image from "next/image"
+import { useSession } from "next-auth/react"
+import { redirect } from "next/navigation"
 import { useState } from "react"
 import useAsyncEffect from "@/hooks/useAsyncEffect"
 import Ably from "ably"
@@ -21,6 +22,13 @@ interface ChatProps {
 }
 
 export default function Chat() {
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/auth/login?callbackUrl=/projects/chat")
+    }
+  })
+
   const [channel, setChannel] = useState<any>(null)
   const [messages, setMessages] = useState<ChatProps>({
     messages: [],
@@ -40,7 +48,7 @@ export default function Chat() {
   useAsyncEffect(async () => {
 
     setUser({
-      name: prompt("What is your name?", "My name") as string
+      name: session?.user?.name as string
     })
 
     const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);
