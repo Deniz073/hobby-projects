@@ -4,7 +4,7 @@ import RealLifeProjects from "./components/RealLifeProjects/RealLifeProjects"
 import Testimonials from "./components/Testimonials/Testimonials"
 import WorkExperience from "./components/WorkExperience/WorkExperience"
 
-export default function Home() {
+export default async function Home() {
 
   return (
     <>
