@@ -11,6 +11,13 @@ export default function Login() {
     redirect('/')
   }
 
+  async function Login(provider: string) {
+    //sign in then add user to database with prisma
+    const data = await signIn(provider)
+    console.log(data)
+
+  }
+
   return (
     <>
       <div className="flex min-h-[40vh] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -23,7 +30,7 @@ export default function Login() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div>
             <button
-              onClick={() => signIn("google")}
+              onClick={() => Login("google")}
               className="flex disabled:cursor-wait disabled:opacity-50 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in with Google
