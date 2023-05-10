@@ -44,9 +44,10 @@ export default function Chat() {
 
   function sendMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setProcessing(true)
 
     if (message === "") return
+
+    setProcessing(true)
 
     saveChatMessage(user.id, message).then(() => {
       channel.publish('message', { user: user, message: message });
