@@ -11,7 +11,7 @@ import { saveChatMessage } from "@/app/db-interactions/chat"
 
 interface User {
   name: string
-  email: string
+  id: string
 }
 
 interface Message {
@@ -38,16 +38,16 @@ export default function Chat() {
   const [message, setMessage] = useState<string>("")
   const [user, setUser] = useState<User>({
     name: "",
-    email: ""
+    id: ""
   })
 
   function sendMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log("this ran")
+    console.log(user.id)
 
     if (message === "") return
 
-    saveChatMessage(user.email, message).then(() => {
+    saveChatMessage(user.id, message).then(() => {
       channel.publish('message', { user: user, message: message });
       setMessage("")
     }).catch((error) => {
@@ -61,7 +61,7 @@ export default function Chat() {
 
     setUser({
       name: session?.user?.name as string,
-      email: session?.user?.email as string
+      id: session?.user?.id as string
     })
 
     const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);

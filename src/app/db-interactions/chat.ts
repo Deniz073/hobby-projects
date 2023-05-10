@@ -4,16 +4,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export async function saveChatMessage(userEmail: string, content: string){
-    const user = await prisma.user.findUnique({
-        where: {
-            email: userEmail,
-        },
-    })
-
-    if(!user) throw new Error("User not found")
-
-    const userId = user.id
+export async function saveChatMessage(userId: string, content: string){
 
     const result = await prisma.chatMessage.create({
         data: {
