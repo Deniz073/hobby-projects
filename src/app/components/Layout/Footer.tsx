@@ -42,7 +42,7 @@ export default function Footer() {
                 aria-label="Follow on GitHub"
                 href="https://github.com/Deniz073"
                 target="_blank"
-                rel="no-refferer"
+                rel="no-referrer"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ export default function Footer() {
                 aria-label="Follow on LinkedIn"
                 href="https://www.linkedin.com/in/deniz-erdem-2279b5176/"
                 target="_blank"
-                rel="no-refferer"
+                rel="no-referrer"
               >
                 <svg
                   viewBox="0 0 24 24"
