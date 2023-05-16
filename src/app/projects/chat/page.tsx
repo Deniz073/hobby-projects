@@ -12,6 +12,7 @@ import { saveChatMessage, getChatMessagesFromLast24Hours } from "@/app/db-intera
 
 interface User {
   userId: string
+  userImage: string | null
 }
 
 interface Message {
@@ -31,14 +32,15 @@ export default function Chat() {
     }
   })
 
-  const [processing , setProcessing] = useState<boolean>(false)
+  const [processing, setProcessing] = useState<boolean>(false)
   const [channel, setChannel] = useState<any>(null)
   const [messages, setMessages] = useState<ChatProps>({
     messages: [],
   })
   const [message, setMessage] = useState<string>("")
   const [user, setUser] = useState<User>({
-    userId: ""
+    userId: "",
+    userImage: ""
   })
 
   async function sendMessage(e: React.FormEvent<HTMLFormElement>) {
@@ -63,7 +65,8 @@ export default function Chat() {
   useAsyncEffect(async () => {
 
     setUser({
-      userId: session?.user?.id as string
+      userId: session?.user?.id as string,
+      userImage: session?.user?.image as string
     })
 
     const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);
@@ -84,7 +87,7 @@ export default function Chat() {
         messages: messages
       })
     })
-    
+
   }, [])
 
   return (
@@ -96,9 +99,9 @@ export default function Chat() {
       <div id="messages" className="flex flex-col space-y-4 p-3 max-h-[80vh] overflow-y-auto ">
         {messages.messages.map((message, index) => (
           message.user.userId !== user.userId ? (
-            <MessageReceived key={index} message={message.message} />
+            <MessageReceived key={index} message={message.message} image={message.user.userImage} />
           ) : (
-            <MessageSent key={index} message={message.message} />
+            <MessageSent key={index} message={message.message} image={message.user.userImage} />
           )
         ))}
       </div>
@@ -107,9 +110,9 @@ export default function Chat() {
           <form onSubmit={sendMessage} className="w-full flex flex-col sm:flex-row">
             <input
               type="text"
-              value={message} 
-              onChange={e => setMessage(e.target.value)} 
-              placeholder="..." 
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+              placeholder="..."
               className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 bg-gray-200 rounded-md py-3" />
             <div className="sm:relative sm:flex sm:items-center sm:ml-2 mt-2 sm:mt-0">
               <button disabled={processing} type="submit" className="inline-flex items-center w-full justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none disabled:opacity-50 disabled:cursor-wait">

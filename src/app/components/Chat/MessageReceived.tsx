@@ -1,7 +1,7 @@
 import Image from "next/image"
 import MessageInterface from "./MessageInterface"
 
-export default function MessageReceived({ message, key }: MessageInterface) {
+export default function MessageReceived({ message, key, image }: MessageInterface) {
   return (
     <div key={key} className="chat-message">
       <div className="flex items-end">
@@ -9,7 +9,7 @@ export default function MessageReceived({ message, key }: MessageInterface) {
           <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">{message}</span>
           </div>
         </div>
-        <Image width={30} height={30} src="/images/nextjs-logo.png" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+        <Image width={30} height={30} src={ image ?? "/images/nextjs-logo.png"} alt="My profile" className="w-6 h-6 rounded-full order-1" />
       </div>
     </div>
   )
