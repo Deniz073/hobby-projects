@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import useAsyncEffect from "@/hooks/useAsyncEffect"
 import Ably from "ably"
 import MessageReceived from "@/app/components/Chat/MessageReceived"
@@ -32,6 +32,8 @@ export default function Chat() {
     }
   })
 
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const textInputRef = useRef<HTMLInputElement>(null)
   const [processing, setProcessing] = useState<boolean>(false)
   const [channel, setChannel] = useState<any>(null)
   const [messages, setMessages] = useState<ChatProps>({
@@ -50,12 +52,15 @@ export default function Chat() {
 
     setProcessing(true)
 
+    channel.publish('message', { user: user, message: message });
+
     saveChatMessage(user.userId, message).then(() => {
-      channel.publish('message', { user: user, message: message });
       setMessage("")
       setProcessing(false)
+      textInputRef.current?.focus()
     }).catch((error) => {
       console.log(error)
+      channel.publish('message-delete', { user: user, message: message })
       setProcessing(false)
     })
 
@@ -80,6 +85,13 @@ export default function Chat() {
       }))
     });
 
+    channel.subscribe('message-delete', (message: any) => {
+      setMessages(prevState => ({
+        messages: prevState.messages.filter((msg) =>
+          msg.user.userId !== message.data.user.userId && msg.message !== message.data.message)
+      }))
+    });
+
     setChannel(channel)
 
     getChatMessagesFromLast24Hours().then((messages) => {
@@ -90,13 +102,21 @@ export default function Chat() {
 
   }, [])
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
   return (
-    <div className="flex-1 p:2 sm:p-6 justify-between overflow-auto flex flex-col min-h-[90vh] mx-auto max-w-[100vh]">
+    <div className="flex-1 p-2 sm:p-6 justify-between overflow-auto flex flex-col min-h-[90vh] mx-auto max-w-[100vh]">
       <div className="flex flex-col sm:items-center text-center justify-center py-3 border-b-2 border-gray-200">
         <h2 className=" font-semibold">Chat app with websockets</h2>
         <p className="text-sm text-gray-500">Messages are removed after 24 hours</p>
       </div>
-      <div id="messages" className="flex flex-col space-y-4 p-3 max-h-[80vh] overflow-y-auto ">
+      <div id="messages" className="flex flex-col space-y-4 p-3 max-h-[60vh] sm:max-h-[70vh] overflow-y-auto ">
         {messages.messages.map((message, index) => (
           message.user.userId !== user.userId ? (
             <MessageReceived key={index} message={message.message} image={message.user.userImage} />
@@ -104,12 +124,14 @@ export default function Chat() {
             <MessageSent key={index} message={message.message} image={message.user.userImage} />
           )
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
         <div className="relative flex flex-col sm:flex-row">
           <form onSubmit={sendMessage} className="w-full flex flex-col sm:flex-row">
             <input
               type="text"
+              ref={textInputRef}
               value={message}
               onChange={e => setMessage(e.target.value)}
               placeholder="..."

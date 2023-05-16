@@ -32,7 +32,6 @@ export async function getChatMessagesFromLast24Hours() {
     }
   })
 
-  console.log(result)
 
   prisma.$disconnect()
   return result.map((message) => {
