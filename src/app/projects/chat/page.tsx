@@ -7,11 +7,11 @@ import useAsyncEffect from "@/hooks/useAsyncEffect"
 import Ably from "ably"
 import MessageReceived from "@/app/components/Chat/MessageReceived"
 import MessageSent from "@/app/components/Chat/MessageSent"
-import { saveChatMessage } from "@/app/db-interactions/chat"
+import { saveChatMessage, getChatMessagesFromLast24Hours } from "@/app/db-interactions/chat"
+
 
 interface User {
-  name: string
-  id: string
+  userId: string
 }
 
 interface Message {
@@ -38,18 +38,17 @@ export default function Chat() {
   })
   const [message, setMessage] = useState<string>("")
   const [user, setUser] = useState<User>({
-    name: "",
-    id: ""
+    userId: ""
   })
 
-  function sendMessage(e: React.FormEvent<HTMLFormElement>) {
+  async function sendMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     if (message === "") return
 
     setProcessing(true)
 
-    saveChatMessage(user.id, message).then(() => {
+    saveChatMessage(user.userId, message).then(() => {
       channel.publish('message', { user: user, message: message });
       setMessage("")
       setProcessing(false)
@@ -64,8 +63,7 @@ export default function Chat() {
   useAsyncEffect(async () => {
 
     setUser({
-      name: session?.user?.name as string,
-      id: session?.user?.id as string
+      userId: session?.user?.id as string
     })
 
     const ably = new Ably.Realtime.Promise(process.env.NEXT_PUBLIC_ABLY_API_KEY as string);
@@ -81,18 +79,23 @@ export default function Chat() {
 
     setChannel(channel)
 
-
+    getChatMessagesFromLast24Hours().then((messages) => {
+      setMessages({
+        messages: messages
+      })
+    })
+    
   }, [])
 
   return (
     <div className="flex-1 p:2 sm:p-6 justify-between overflow-auto flex flex-col min-h-[90vh] mx-auto max-w-[100vh]">
       <div className="flex flex-col sm:items-center text-center justify-center py-3 border-b-2 border-gray-200">
         <h2 className=" font-semibold">Chat app with websockets</h2>
-        <p className="text-sm text-gray-500">Messages are not saved and will dissapear on page refresh</p>
+        <p className="text-sm text-gray-500">Messages are removed after 24 hours</p>
       </div>
       <div id="messages" className="flex flex-col space-y-4 p-3 max-h-[80vh] overflow-y-auto ">
         {messages.messages.map((message, index) => (
-          message.user.name !== user.name ? (
+          message.user.userId !== user.userId ? (
             <MessageReceived key={index} message={message.message} />
           ) : (
             <MessageSent key={index} message={message.message} />

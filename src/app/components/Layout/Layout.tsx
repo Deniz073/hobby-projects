@@ -15,7 +15,7 @@ const games = [
 const projects = [
   { name: 'Make a choice', description: 'To help you make a choice', href: '/projects/make-a-choice' },
   { name: 'Draw', description: 'Draw something beautiful', href: '/projects/draw' },
-  { name: 'Chat app', description: 'Chat app using socket.io', href: '/projects/chat' },
+  { name: 'Chat app', description: 'Chat app with websockets', href: '/projects/chat' },
 ]
 
 const dropdowns = [
