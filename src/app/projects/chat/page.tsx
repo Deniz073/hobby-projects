@@ -100,6 +100,11 @@ export default function Chat() {
       })
     })
 
+    return () => {
+      channel.unsubscribe()
+      ably.close()
+    }
+
   }, [])
 
   const scrollToBottom = () => {

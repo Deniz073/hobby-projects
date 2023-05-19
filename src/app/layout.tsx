@@ -4,17 +4,17 @@ import Layout from './components/Layout/Layout'
 export const metadata = {
   title: 'Hobby projects by Deniz Erdem ',
   applicationName: 'Hobby projects and portfolio of Deniz Erdem',
-  description: 'Hobby projects and portfolio site created by Deniz Erdem: github.com/Deniz073',
+  description: 'Hobby projects and portfolio website created by Deniz Erdem',
   authors: [{ name: 'Deniz Erdem', url: 'github.com/Deniz073' }],
   category: 'Portfolio',
-  keywords: "portfolio, hobby projects, react, nextjs, nextjs13",
+  keywords: ['deniz-hobby-projects', 'deniz hobby projects', 'portfolio', 'react', 'nextjs', 'nextjs13'],
   colorScheme: "light",
   themeColor: "#f6f4fd",
   icons: '/images/nextjs-logo.png',
   openGraph: {
     title: 'Hobby projects by Deniz Erdem',
     type: 'website',
-    description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+    description: 'Hobby projects created by Deniz Erdem',
     images: [
       { url: '/images/og-image.jpg' }
     ],
@@ -26,7 +26,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hobby projects by Deniz Erdem',
-    description: 'Hobby projects created by Deniz Erdem: github.com/Deniz073',
+    description: 'Hobby projects created by Deniz Erdem',
     images: [
       { url: '/images/og-image.jpg' }
     ],

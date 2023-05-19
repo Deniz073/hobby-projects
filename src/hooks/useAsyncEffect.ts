@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useAsyncEffect = (asyncCallback: () => Promise<void>, dependencies: any[]) => {
+const useAsyncEffect = (asyncCallback: () => Promise<() => void>, dependencies: any[]) => {
   useEffect(() => {
     let isMounted = true;
     const callback = async () => {
