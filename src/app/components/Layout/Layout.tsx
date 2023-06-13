@@ -16,6 +16,7 @@ const projects = [
   { name: 'Make a choice', description: 'To help you make a choice', href: '/projects/make-a-choice' },
   { name: 'Draw', description: 'Draw something beautiful', href: '/projects/draw' },
   { name: 'Chat app', description: 'Chat app with websockets', href: '/projects/chat' },
+  { name: 'Todo app', description: 'Manage your tasks', href: '/projects/todo' },
 ]
 
 const dropdowns = [
