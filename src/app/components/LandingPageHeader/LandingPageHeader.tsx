@@ -4,7 +4,7 @@ export default function LandingPageHeader() {
 
   return (
     <>
-      <div className="sm:mb-8 ml-12 mb-5  flex justify-center sm:w-auto w-60">
+      <div className="sm:mb-8 ml-12 mb-5  flex justify-center sm:w-auto w-64">
         <div className="relative rounded-full px-3 justify-center align-middle sm:w-auto py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
           My GitHub profile:{' '}
           <a href="https://github.com/Deniz073" target="_blank" rel="no-referrer" className="font-semibold text-indigo-600">
