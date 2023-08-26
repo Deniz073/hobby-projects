@@ -50,6 +50,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   ChatMessage   ChatMessage[]
+  Task          Task[]
 }
 
 model VerificationToken {
@@ -66,6 +67,20 @@ model ChatMessage {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+
+  @@index([userId])
+}
+
+model Task {
+  id        String   @id @default(cuid())
+  title   String
+  priority   String
+  status   String @default("todo")
+  userId    String
+  label  String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }

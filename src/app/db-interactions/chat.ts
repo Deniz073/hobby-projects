@@ -1,8 +1,7 @@
 "use server"
 
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "./db"
 
-const prisma = new PrismaClient()
 
 export async function saveChatMessage(userId: string, content: string) {
 
@@ -13,7 +12,6 @@ export async function saveChatMessage(userId: string, content: string) {
     },
   })
 
-  prisma.$disconnect()
   return result
 }
 
@@ -33,7 +31,6 @@ export async function getChatMessagesFromLast24Hours() {
   })
 
 
-  prisma.$disconnect()
   return result.map((message) => {
     return {
       user: {
