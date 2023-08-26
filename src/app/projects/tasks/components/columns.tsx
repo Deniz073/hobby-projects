@@ -1,10 +1,9 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
-
+import classNames from "classnames"
 import { labels, priorities, statuses } from "../data/data"
 import { Task } from "../data/schema"
 import { DataTableColumnHeader } from "./data-table-column-header"
@@ -37,7 +36,10 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Task" />
     ),
-    cell: ({ row }) => <div className={`w-[80px] ${row.getValue("status") === "done" && "line-through"} `}>{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className={classNames({
+      "w-[80px]": true,
+      "line-through": row.getValue("status") === "done" || row.getValue("status") === "canceled"
+    })}>{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -52,7 +54,10 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className={`max-w-[500px] truncate font-medium ${row.getValue("status") === "done" && "line-through"}`}>
+          <span className={classNames({
+            "max-w-[500px] truncate font-medium": true,
+            "line-through": row.getValue("status") === "done" || row.getValue("status") === "canceled"
+          })}>
             {row.getValue("title")}
           </span>
         </div>

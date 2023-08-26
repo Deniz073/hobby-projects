@@ -6,6 +6,7 @@ import CreateTaskDialog from "./components/create-task-dialog"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/AuthOptions"
 import { redirect} from "next/navigation"
+import HotToast from "./components/hot-toast"
 
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default async function TaskPage() {
           </div>
         </div>
         <DataTable data={tasks} columns={columns} />
+        <HotToast />
       </div>
     </div>
   )

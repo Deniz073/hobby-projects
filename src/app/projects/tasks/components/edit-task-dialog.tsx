@@ -1,6 +1,5 @@
-"use client"
 import { useState } from "react";
-import { createTaskForUser } from "@/app/db-interactions/tasks";
+import { editTask } from "@/app/db-interactions/tasks";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,7 +10,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 
 import {
@@ -25,34 +23,47 @@ import {
 } from "@/components/ui/select";
 
 import { toast } from 'react-hot-toast';
+import { z } from 'zod';
 
-export default function CreateTaskDialog() {
-  const [isOpen, setIsOpen] = useState(false);
+const taskSchema = z.object({
+  id: z.string(),
+  title: z.string().nonempty(),
+  status: z.string().nonempty(),
+  label: z.string().nonempty(),
+  priority: z.string().nonempty(),
+});
+
+interface EditTaskDialogProps {
+  task: z.infer<typeof taskSchema>
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function EditTaskDialog({ task, isOpen, setIsOpen }: EditTaskDialogProps) {
   const [error, setError] = useState<string | null>(null);
 
   async function createTask(formData: FormData) {
-    const result = await createTaskForUser(formData)
+    const result = await editTask(formData)
 
-    if(!result.success) {
+    if (!result.success) {
       setError("Please fill in all input fields")
       return
     }
-    toast.success('Task created successfully!')
+
+    toast.success('Task editted successfully!')
     setError(null)
     setIsOpen(false)
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button>Add Task</Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form action={createTask}>
+          <input type="hidden" name="id" defaultValue={task.id} />
           <DialogHeader>
-            <DialogTitle>Add Task</DialogTitle>
+            <DialogTitle>Edit Task</DialogTitle>
             <DialogDescription>
-              Add a new task
+              Edit this task
             </DialogDescription>
             {error && <p className="text-red-500">{error}</p>}
           </DialogHeader>
@@ -61,13 +72,13 @@ export default function CreateTaskDialog() {
               <Label htmlFor="title" className="text-right">
                 Title
               </Label>
-              <Input id="title" name="title" className="col-span-3" />
+              <Input id="title" name="title" defaultValue={task.title} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="status" className="text-right">
                 Status
               </Label>
-              <Select  name="status">
+              <Select defaultValue={task.status} name="status">
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a status" />
                 </SelectTrigger>
@@ -86,7 +97,7 @@ export default function CreateTaskDialog() {
               <Label htmlFor="priority" className="text-right">
                 Priority
               </Label>
-              <Select  name="priority">
+              <Select defaultValue={task.priority} name="priority">
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a priority" />
                 </SelectTrigger>
@@ -107,5 +118,5 @@ export default function CreateTaskDialog() {
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
