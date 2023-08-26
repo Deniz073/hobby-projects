@@ -1,13 +1,13 @@
 import { promises as fs } from "fs"
 import path from "path"
 import { Metadata } from "next"
-import Image from "next/image"
 import { z } from "zod"
+import { getTasksForUser } from "@/app/db-interactions/tasks"
 
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
-import { UserNav } from "./components/user-nav"
 import { taskSchema } from "./data/schema"
+import CreateTaskSheet from "./components/create-task-sheet"
 
 export const metadata: Metadata = {
   title: "Tasks",
@@ -26,7 +26,7 @@ async function getTasks() {
 }
 
 export default async function TaskPage() {
-  const tasks = await getTasks()
+  const tasks = await getTasksForUser("cllqrbz8m0000tkkw5y7m8ia1");
 
   return (
     <div className="max-w-7xl mx-auto mt-12">
@@ -36,10 +36,11 @@ export default async function TaskPage() {
             <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
             <p className="text-muted-foreground">
               Here&apos;s a list of your tasks for this month!
+              {tasks.length}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <p>ui by shadcn</p>
+            <CreateTaskSheet />
           </div>
         </div>
         <DataTable data={tasks} columns={columns} />
