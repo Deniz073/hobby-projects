@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "./db";
+import { z } from "zod";
 
 export async function getTasksForUser(userId: string) {
   const result = await prisma.task.findMany({
@@ -16,30 +17,38 @@ export async function getTasksForUser(userId: string) {
   return result;
 }
 
-export async function createTaskForUser(taskData: FormData) {
-  const title = taskData.get("title")?.toString();
-  const status = taskData.get("status")?.toString();
-  const priority = taskData.get("priority")?.toString();
-  const label = "placeholder";
+export async function createTaskForUser(formData: FormData) {
+  try {
+    const parsed = z.object({
+      title: z.string().nonempty(),
+      status: z.string().nonempty(),
+      priority: z.string().nonempty(),
+    }).parse({
+      title: formData.get("title"),
+      status: formData.get("status"),
+      priority: formData.get("priority")
+    });
 
-  console.log("hier")
+    await prisma.task.create({
+      data: {
+        title: parsed.title,
+        status: parsed.status,
+        priority: parsed.priority,
+        label: "bug",
+        userId: "cllqrbz8m0000tkkw5y7m8ia1",
+      },
+    });
 
-  if(!title || !status || !priority) throw new Error("Missing required fields");
+    revalidatePath("/projects/tasks");
 
-   await prisma.task.create({
-    data: {
-      title,
-      status,
-      priority,
-      label,
-      userId : "cllqrbz8m0000tkkw5y7m8ia1",
-    },
-  });
+    return { success: true };
+  } catch (e) {
+    return { success: false };
+  };
 
-  revalidatePath("/projects/tasks");
 }
 
-export async function deleteTask(id: string) {
+export async function deleteTask(id: string): Promise<void> {
   await prisma.task.delete({
     where: {
       id,

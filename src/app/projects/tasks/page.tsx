@@ -7,22 +7,11 @@ import { getTasksForUser } from "@/app/db-interactions/tasks"
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
 import { taskSchema } from "./data/schema"
-import CreateTaskSheet from "./components/create-task-sheet"
+import CreateTaskDialog from "./components/create-task-dialog"
 
 export const metadata: Metadata = {
   title: "Tasks",
   description: "A task and issue tracker build using Tanstack Table.",
-}
-
-// Simulate a database read for tasks.
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), "src/app/projects/tasks/data/tasks.json")
-  )
-
-  const tasks = JSON.parse(data.toString())
-
-  return z.array(taskSchema).parse(tasks)
 }
 
 export default async function TaskPage() {
@@ -36,11 +25,10 @@ export default async function TaskPage() {
             <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
             <p className="text-muted-foreground">
               Here&apos;s a list of your tasks for this month!
-              {tasks.length}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <CreateTaskSheet />
+            <CreateTaskDialog />
           </div>
         </div>
         <DataTable data={tasks} columns={columns} />

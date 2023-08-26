@@ -30,7 +30,7 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original)
-  let [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
 
   return (
@@ -60,9 +60,13 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => startTransition(() => deleteTask(task.id))}>
+        <DropdownMenuItem className="hover:bg-red-400" onClick={() => {
+          startTransition(() => {
+            deleteTask(task.id)
+          })
+        }}>
           Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <DropdownMenuShortcut>⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
