@@ -1,13 +1,12 @@
-import { promises as fs } from "fs"
-import path from "path"
 import { Metadata } from "next"
-import { z } from "zod"
 import { getTasksForUser } from "@/app/db-interactions/tasks"
-
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
-import { taskSchema } from "./data/schema"
 import CreateTaskDialog from "./components/create-task-dialog"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/AuthOptions"
+import { redirect} from "next/navigation"
+
 
 export const metadata: Metadata = {
   title: "Tasks",
@@ -15,7 +14,12 @@ export const metadata: Metadata = {
 }
 
 export default async function TaskPage() {
-  const tasks = await getTasksForUser("cllqrbz8m0000tkkw5y7m8ia1");
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/auth/login")
+  }
+
+  const tasks = await getTasksForUser(session.user?.id as string);
 
   return (
     <div className="max-w-7xl mx-auto mt-12">

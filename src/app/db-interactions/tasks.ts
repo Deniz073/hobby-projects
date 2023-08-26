@@ -3,6 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "./db";
 import { z } from "zod";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../AuthOptions";
+import { redirect } from "next/navigation";
 
 export async function getTasksForUser(userId: string) {
   const result = await prisma.task.findMany({
@@ -18,6 +21,11 @@ export async function getTasksForUser(userId: string) {
 }
 
 export async function createTaskForUser(formData: FormData) {
+
+  const session = await getServerSession(authOptions)
+
+  if(!session) redirect("auth/login")
+
   try {
     const parsed = z.object({
       title: z.string().nonempty(),
@@ -35,7 +43,7 @@ export async function createTaskForUser(formData: FormData) {
         status: parsed.status,
         priority: parsed.priority,
         label: "bug",
-        userId: "cllqrbz8m0000tkkw5y7m8ia1",
+        userId: session.user?.id as string
       },
     });
 
@@ -49,6 +57,10 @@ export async function createTaskForUser(formData: FormData) {
 }
 
 export async function deleteTask(id: string): Promise<void> {
+  const session = await getServerSession(authOptions)
+
+  if (!session) redirect("auth/login")
+  
   await prisma.task.delete({
     where: {
       id,
