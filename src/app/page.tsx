@@ -5,7 +5,7 @@ import Technologies from "./components/Technologies"
 import Testimonials from "./components/Testimonials/Testimonials"
 import WorkExperience from "./components/WorkExperience/WorkExperience"
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <>

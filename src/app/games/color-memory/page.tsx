@@ -104,7 +104,7 @@ export default function ColorMemory() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center ">
-      <h1 className="text-4xl font-bold">Color Memory Game</h1>
+      <h1 className="text-2xl md:text-4xl font-bold">Color Memory Game</h1>
       <small className="text-gray-500 mb-5">by Deniz Erdem</small>
       <div className="grid grid-cols-2 gap-3">
         <ColorMemoryButton disabled={!gameStarted || disabled} ref={buttonRefs.red} className="bg-red-500" onClick={() => handleClick('red')} />
