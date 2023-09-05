@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className='h-full scroll-smooth' onClick={closeAllPanels}>
       <head>
-        <link rel='canonical' href='https://deniz-hobby-projects.nl' />
+        <link rel='canonical' href='https://www.denizerdem.nl' />
         <link rel="apple-touch-icon" href="/images/og-image.jpg" />
       </head>
       <body className='h-full'>

@@ -7,7 +7,7 @@ export const metadata = {
   description: 'Portfolio and hobby projects website created by Deniz Erdem',
   authors: [{ name: 'Deniz Erdem', url: 'github.com/Deniz073' }],
   category: 'Portfolio',
-  keywords: ['deniz-hobby-projects', 'deniz hobby projects', 'deniz erdem', 'portfolio', 'react', 'nextjs', 'nextjs13'],
+  keywords: ['deniz', 'erdem', 'deniz erdem', 'portfolio', 'react', 'nextjs', 'nextjs13'],
   colorScheme: "light",
   themeColor: "#f6f4fd",
   icons: '/images/nextjs-logo.png',
@@ -18,9 +18,9 @@ export const metadata = {
     images: [
       { url: '/images/og-image.jpg' }
     ],
-    url: 'https://deniz-hobby-projects.nl/',
+    url: 'https://www.denizerdem.nl/',
     countryName: 'Netherlands',
-    siteName: 'Hobby projects',
+    siteName: 'Deniz Erdem',
     locale: 'en_US',
   },
   twitter: {
