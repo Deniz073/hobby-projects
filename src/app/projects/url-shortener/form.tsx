@@ -14,15 +14,18 @@ interface ResultProps {
 
 export default function Form() {
   const [formResponse, setFormResponse] = useState<ResultProps>()
+  const [pending, setPending] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setPending(true)
 
     const formData = new FormData(e.currentTarget)
     formData.append('long', e.currentTarget.long.value)
 
     const result = await createShortUrl(formData)
     setFormResponse(result)
+    setPending(false)
   }
 
 
@@ -31,8 +34,7 @@ export default function Form() {
       <form onSubmit={handleSubmit} className="w-full items-center gap-y-3 flex flex-col mx-auto">
         <Input type="url" required name="long" className="w-full md:w-1/2" placeholder="Enter url" />
         {formResponse?.issues && <p className="text-sm text-red-500">Please type a valid url</p>}
-
-        <Button className="w-1/2">Create short url</Button>
+        <Button disabled={pending} className="w-1/2">{pending ? "Creating url" : "Create short url"}</Button>
       </form>
       {formResponse?.short && (
         <div className="w-full flex flex-col items-center mt-4">
