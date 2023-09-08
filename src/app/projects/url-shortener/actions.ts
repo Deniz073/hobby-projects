@@ -12,11 +12,11 @@ export default async function createShortUrl(formData: FormData) {
 
   try {
     const data = urlSchema.parse(Object.fromEntries(formData.entries()))
-    const response = await fetch(`${baseUrl}?url=${data.long}&private=1`, {
+    const result = await fetch(`${baseUrl}?url=${data.long}&private=1`, {
       cache: "no-cache",
       method: "POST",
-    })
-    const result = await response.text()
+    }).then(res => res.text())
+
     console.log("res", result)
     return {
       success: true,
