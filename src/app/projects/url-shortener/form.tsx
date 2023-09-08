@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import createShortUrl from "./actions"
 import { useState } from "react"
 import type { ZodIssue } from "zod"
+import QRCode from "react-qr-code";
 
 interface ResultProps {
   success: boolean,
@@ -42,6 +43,7 @@ export default function Form() {
         <div className="w-full flex flex-col items-center mt-4">
           <p className="text-xl">Your short url is:</p>
           <a href={formResponse.short} target="_blank" rel="noopener noreferrer" className="text-blue-500">{formResponse.short}</a>
+          <QRCode className="mt-3" value={formResponse.short} />
         </div>
       )}
     </div>
