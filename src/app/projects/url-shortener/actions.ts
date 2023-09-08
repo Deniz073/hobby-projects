@@ -8,6 +8,13 @@ const urlSchema = z.object({
 
 const baseUrl = "https://urlbae.com/api/url/add"
 
+interface ApiResponse {
+  error: 1 | 0,
+  shorturl?: string,
+  id?: string,
+  message?: string,
+}
+
 export default async function createShortUrl(formData: FormData) {
 
   try {
@@ -24,7 +31,14 @@ export default async function createShortUrl(formData: FormData) {
       })
     })
 
-    const result = await response.json()
+    const result: ApiResponse = await response.json()
+
+    if(result.error){
+      return {
+        success: false,
+        message: result.message,
+      }
+    }
 
     return {
       success: true,
