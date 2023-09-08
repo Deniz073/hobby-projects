@@ -22,6 +22,7 @@ export default function Form() {
     formData.append('long', e.currentTarget.long.value)
 
     const result = await createShortUrl(formData)
+    console.log(result)
     setFormResponse(result)
   }
 
