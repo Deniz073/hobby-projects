@@ -33,7 +33,7 @@ export default function Form() {
   return (
     <div className="w-full flex flex-col">
       <form onSubmit={handleSubmit} className="w-full items-center gap-y-3 flex flex-col mx-auto">
-        <Input type="url" required name="long" className="w-full md:w-1/2" placeholder="Enter url" />
+        <Input type="url" required inputMode="text" name="long" className="w-full md:w-1/2" placeholder="Enter url" />
         {formResponse?.issues && <p className="text-sm text-red-500">Please type a valid url</p>}
         {formResponse?.message && <p className="text-sm text-red-500">{formResponse.message}</p>}
         <Button disabled={pending} className="w-1/2">{pending ? "Creating url" : "Create short url"}</Button>
