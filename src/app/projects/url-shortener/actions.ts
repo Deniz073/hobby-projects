@@ -6,21 +6,29 @@ const urlSchema = z.object({
   long: z.string().url(),
 })
 
-const baseUrl = "https://ulvis.net/api.php"
+const baseUrl = "https://urlbae.com/api/url/add"
 
 export default async function createShortUrl(formData: FormData) {
 
   try {
     const data = urlSchema.parse(Object.fromEntries(formData.entries()))
-    const result = await fetch(`${baseUrl}?url=${data.long}&private=1`, {
+    const response = await fetch(`${baseUrl}`, {
       cache: "no-cache",
       method: "POST",
-    }).then(res => res.text())
+      headers: {
+        "Authorization": `Bearer ${process.env.URLBAE_APIKEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url: data.long,
+      })
+    })
 
-    console.log("res", result)
+    const result = await response.json()
+
     return {
       success: true,
-      short: result,
+      short: result.shorturl,
     };
   }
   catch (error) {
