@@ -9,7 +9,8 @@ import type { ZodIssue } from "zod"
 interface ResultProps {
   success: boolean,
   short?: string,
-  issues?: ZodIssue[]
+  issues?: ZodIssue[],
+  message?: string
 }
 
 export default function Form() {
@@ -34,6 +35,7 @@ export default function Form() {
       <form onSubmit={handleSubmit} className="w-full items-center gap-y-3 flex flex-col mx-auto">
         <Input type="url" required name="long" className="w-full md:w-1/2" placeholder="Enter url" />
         {formResponse?.issues && <p className="text-sm text-red-500">Please type a valid url</p>}
+        {formResponse?.message && <p className="text-sm text-red-500">{formResponse.message}</p>}
         <Button disabled={pending} className="w-1/2">{pending ? "Creating url" : "Create short url"}</Button>
       </form>
       {formResponse?.short && (
