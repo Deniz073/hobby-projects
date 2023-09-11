@@ -33,11 +33,7 @@ export async function createTaskForUser(formData: FormData) {
   if(!session) redirect("auth/login")
 
   try {
-    const parsed = taskSchema.parse({
-      title: formData.get("title"),
-      status: formData.get("status"),
-      priority: formData.get("priority")
-    });
+    const parsed = taskSchema.parse(Object.fromEntries(formData.entries()));
 
     await prisma.task.create({
       data: {
@@ -67,11 +63,7 @@ export async function editTask(formData: FormData) {
   const taskId = formData.get("id") as string
 
   try {
-    const parsed = taskSchema.parse({
-      title: formData.get("title"),
-      status: formData.get("status"),
-      priority: formData.get("priority")
-    });
+    const parsed = taskSchema.parse(Object.fromEntries(formData.entries()));
 
     //check if task userId is the same as session userId
     const task = await prisma.task.findUnique({

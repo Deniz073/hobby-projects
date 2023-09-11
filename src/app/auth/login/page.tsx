@@ -14,7 +14,6 @@ export default function Login() {
   async function Login(provider: string) {
     //sign in then add user to database with prisma
     const data = await signIn(provider)
-    console.log(data)
 
   }
 
