@@ -41,6 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <link rel='canonical' href='https://denizerdem.nl' />
         <link rel="apple-touch-icon" href="/images/og-image.jpg" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className='h-full'>
         <Provider>

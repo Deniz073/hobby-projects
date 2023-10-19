@@ -10,7 +10,7 @@ import {
 } from 'next-share';
 import Link from 'next/link';
 
-const WEBSITE_URL = "https://deniz-hobby-projects.nl/"
+const WEBSITE_URL = "https://denizerdem.nl/"
 
 export default function Footer() {
   return (
