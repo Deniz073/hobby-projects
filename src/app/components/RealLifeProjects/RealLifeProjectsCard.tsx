@@ -7,12 +7,13 @@ interface Props {
   description: string;
   role: string;
   date: string;
+  link?: string
   dateDisplay: string;
   tags: string[];
 }
 
 
-export default function RealLifeProjectsCard({ title, description, role, date, dateDisplay, tags }: Props) {
+export default function RealLifeProjectsCard({ title, description, role, date, link, dateDisplay, tags }: Props) {
   return (
     <motion.article {...fadeIn} className="inline-block mt-3 lg:flex">
       <motion.div whileHover={{ scale: 1.04 }} className=" w-64  lg:w-[25rem] lg:h-[18rem]  overflow-hidden shadow-xl shadow-slate-950/10 rounded-2xl bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
@@ -21,7 +22,7 @@ export default function RealLifeProjectsCard({ title, description, role, date, d
             {dateDisplay}
           </time>
           <div className="text-gray-900 font-bold text-xl mb-2">
-            {title}
+            {link ? <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline">{title}</a> : <span>{title}</span> }
           </div>
           <p className="text-gray-700 text-base">
             {description}

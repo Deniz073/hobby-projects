@@ -12,7 +12,7 @@ export default function RealLifeProjects() {
           </p>
         </div>
         <div
-          className="flex overflow-x-scroll pb-10 scrollbar-thumb-"
+          className="flex overflow-x-scroll pb-10 "
       >
         <div
           className="flex flex-nowrap gap-4 ml-1 "

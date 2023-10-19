@@ -3,8 +3,8 @@ import Layout from './components/Layout/Layout'
 
 export const metadata = {
   title: 'Hobby projects by Deniz Erdem ',
-  applicationName: 'Hobby projects and portfolio of Deniz Erdem',
   description: 'Portfolio and hobby projects website created by Deniz Erdem',
+  applicationName: 'Hobby projects and portfolio of Deniz Erdem',
   authors: [{ name: 'Deniz Erdem', url: 'github.com/Deniz073' }],
   category: 'Portfolio',
   keywords: ['deniz', 'erdem', 'deniz erdem', 'portfolio', 'react', 'nextjs', 'nextjs13'],
