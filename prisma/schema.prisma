@@ -73,14 +73,22 @@ model ChatMessage {
 
 model Task {
   id        String   @id @default(cuid())
-  title   String
-  priority   String
-  status   String @default("todo")
+  title     String
+  priority  String
+  status    String   @default("todo")
   userId    String
-  label  String
+  label     String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+model UrlMapping {
+  id        String   @id @default(cuid())
+  url       String
+  shortUrl  String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
