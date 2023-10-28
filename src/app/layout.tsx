@@ -1,5 +1,13 @@
 import './globals.css'
 import Layout from './components/Layout/Layout'
+import { Viewport } from 'next'
+
+export function generateViewport(): Viewport {
+  return {
+    themeColor: '#f6f4fd',
+    colorScheme: 'light',
+  }
+}
 
 export const metadata = {
   title: 'Hobby projects by Deniz Erdem ',
@@ -8,8 +16,6 @@ export const metadata = {
   authors: [{ name: 'Deniz Erdem', url: 'github.com/Deniz073' }],
   category: 'Portfolio',
   keywords: ['deniz', 'erdem', 'deniz erdem', 'portfolio', 'react', 'nextjs', 'nextjs13'],
-  colorScheme: "light",
-  themeColor: "#f6f4fd",
   icons: '/images/nextjs-logo.png',
   openGraph: {
     title: 'Hobby projects by Deniz Erdem',
