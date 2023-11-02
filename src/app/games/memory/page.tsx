@@ -35,7 +35,7 @@ function Memory() {
 
               <motion.div
                 animate={{ transform: isChosen || isFound ? 'rotateY(0deg)' : 'rotateY(180deg)', transformStyle: 'preserve-3d' }}
-                transition={{ duration: 0.2, ease: 'easeInOut'  }}
+                transition={{ duration: 0.2, ease: 'easeInOut'}}
                 className={classNames({
                   [styles['card__icon-container']]: true,
                   [styles['card__icon-container--board-complete']]: isComplete
