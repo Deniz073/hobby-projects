@@ -4,7 +4,7 @@
     "description": "DocumentBuddy is an AI chat buddy SaaS product i made for my own company Erdem Software. It uses the latest Next.js features with an openai and Stripe integration.",
     "date": "2023-10-01",
     "dateDisplay": "October 2023",
-    "role": "Lead developer",
+    "role": "Lead fullstack developer",
     "tags": [
       "Web development"
     ],
@@ -15,7 +15,7 @@
     "description": "The organization Moesland is a carnival organization in the Netherlands. I was the lead developer in developing their mobile app and CMS using Laravel, React and React Native.",
     "date": "2023-02-01",
     "dateDisplay": "February 2023",
-    "role": "Lead developer",
+    "role": "Lead fullstack developer",
     "tags": [
       "Web development",
       "Mobile development"

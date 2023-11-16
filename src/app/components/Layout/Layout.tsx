@@ -14,6 +14,7 @@ const games = [
 
 const projects = [
   { name: 'Tasks', description: 'Manage all your tasks in a beautiful data table', href: '/projects/tasks'},
+  { name: 'Hours registry', description: 'An application to register all the hours you have worked', href: 'https://hoursregistry.denizerdem.nl' },
   { name: 'Make a choice', description: 'To help you make a choice', href: '/projects/make-a-choice' },
   { name: 'Draw', description: 'Draw something beautiful', href: '/projects/draw' },
   { name: 'Chat app', description: 'Chat app with websockets', href: '/projects/chat' },
