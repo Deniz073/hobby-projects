@@ -40,6 +40,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "email-js": "^2.0.2",
+    "embla-carousel-react": "^8.0.0-rc17",
     "eslint": "8.39.0",
     "eslint-config-next": "^14.0.0",
     "flowbite-react": "^0.4.3",
