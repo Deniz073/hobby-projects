@@ -17,6 +17,7 @@ export const metadata = {
   category: 'Portfolio',
   keywords: ['deniz', 'erdem', 'deniz erdem', 'portfolio', 'react', 'nextjs', 'nextjs13'],
   icons: '/images/nextjs-logo.png',
+  metadataBase: new URL("https://www.denizerdem.nl"),
   openGraph: {
     title: 'Hobby projects by Deniz Erdem',
     type: 'website',
