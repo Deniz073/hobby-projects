@@ -51,6 +51,20 @@ model User {
   sessions      Session[]
   ChatMessage   ChatMessage[]
   Task          Task[]
+  apiKey        ApiKey?
+  UrlMapping    UrlMapping[]
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  isActive  Boolean  @default(true)
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
 }
 
 model VerificationToken {
@@ -89,6 +103,10 @@ model UrlMapping {
   id        String   @id @default(cuid())
   url       String
   shortUrl  String   @unique
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }

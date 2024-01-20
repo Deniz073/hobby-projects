@@ -122,7 +122,9 @@ export default function Header({ showPanel, setShowPanel, dropdowns }: HeaderPro
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {
             session?.user ? (
-              <button onClick={() => signOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
+              <Link href="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+                Profile
+              </Link>
             ) : (
               <Link href="/auth/login" className="text-sm font-semibold leading-6 text-gray-900">
                 Sign in <span aria-hidden="true">&rarr;</span>
@@ -188,7 +190,12 @@ export default function Header({ showPanel, setShowPanel, dropdowns }: HeaderPro
               <div className="py-6">
                 {
                   session?.user ? (
-                    <button onClick={() => signOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
+                    <ResponsiveNavLink
+                      onClick={() => setMobileMenuOpen(false)}
+                      href="/profile"
+                      name="Profile"
+                    />
+                    // <button onClick={() => signOut()} className="text-sm font-semibold leading-6 text-gray-900">Sign out</button>
                   ) : (
                     <ResponsiveNavLink
                       onClick={() => setMobileMenuOpen(false)}
@@ -205,3 +212,4 @@ export default function Header({ showPanel, setShowPanel, dropdowns }: HeaderPro
     </header>
   )
 }
+

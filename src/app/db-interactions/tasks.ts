@@ -8,9 +8,9 @@ import { authOptions } from "../AuthOptions";
 import { redirect } from "next/navigation";
 
 const taskSchema = z.object({
-  title: z.string().nonempty(),
-  status: z.string().nonempty(),
-  priority: z.string().nonempty(),
+  title: z.string().min(1),
+  status: z.string().min(1),
+  priority: z.string().min(1),
 })
 
 export async function getTasksForUser(userId: string) {

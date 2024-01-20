@@ -13,16 +13,16 @@ export type ShortUrlApiResult =
 
 export default async function createShortUrl(prevState: any, formData: FormData) {
 
-  await new Promise(resolve => setTimeout(resolve, 2000))
-
   try {
     const { long } = urlSchema.parse(Object.fromEntries(formData.entries()))
 
     const result = await fetch(`${getAbsoluteUrl()}/api/shorten-url`, {
       method: "POST",
+      cache: "no-cache",
       body: JSON.stringify({ longUrl: long }),
       headers: {
         "Content-Type": "application/json",
+        "authorization": `Bearer ${process.env.API_KEY}`
       },
     })
 

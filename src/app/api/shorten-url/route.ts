@@ -1,3 +1,4 @@
+import { prisma } from "@/app/db-interactions/db";
 import { createShortUrlMapping } from "@/app/db-interactions/url-shortener";
 import getAbsoluteUrl from "@/lib/getAbsoluteUrl";
 import { NextRequest, NextResponse } from "next/server";
@@ -7,15 +8,43 @@ const urlSchema = z.object({
   longUrl: z.string().url(),
 })
 
-export async function POST(req: NextRequest) {
+type PostResult =
+  | NextResponse<{ success: true, short: string }>
+  | NextResponse<{ success: false, issues: string[] }>
+  | undefined
 
-  console.log("hoi")
+
+export async function POST(req: NextRequest): Promise<PostResult> {
+
   const body = await req.json();
+  const bearerToken = req.headers.get("authorization")?.split(' ')[1];
+
+  if (!bearerToken) {
+    return NextResponse.json({
+      success: false,
+      issues: ["No bearer token provided"]
+    }, {
+      status: 401
+    })
+  }
+
+  const bearerTokenExists = await prisma.apiKey.count({
+    where: {
+      key: bearerToken
+    }
+  }) > 0
+
+  if (!bearerTokenExists) {
+    return NextResponse.json({
+      success: false,
+      issues: ["Invalid bearer token"]
+    }, {
+      status: 401
+    })
+  }
 
   try {
     const { longUrl } = urlSchema.parse(body)
-
-    console.log("longUrl", longUrl)
 
     const shortUrl = await createShortUrlMapping(longUrl)
 
