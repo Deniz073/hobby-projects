@@ -30,6 +30,7 @@
     "@types/node": "^20.5.6",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
+    "@upstash/ratelimit": "^1.0.0",
     "@vercel/analytics": "^1.0.0",
     "ably": "^1.2.39",
     "animate.css": "^4.1.1",

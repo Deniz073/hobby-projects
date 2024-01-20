@@ -3,6 +3,8 @@ import { createShortUrlMapping } from "@/app/db-interactions/url-shortener";
 import getAbsoluteUrl from "@/lib/getAbsoluteUrl";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 const urlSchema = z.object({
   longUrl: z.string().url(),
@@ -43,16 +45,45 @@ export async function POST(req: NextRequest): Promise<PostResult> {
     })
   }
 
+  const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  })
+
+  const ratelimit = new Ratelimit({
+    redis: redis,
+    limiter: Ratelimit.fixedWindow(10, "10 s"),
+  });
+
+  const { success, remaining, limit } = await ratelimit.limit(bearerToken);
+
+  const rateLimitHeaders = {
+    "X-RateLimit-Limit": limit.toString(),
+    "X-RateLimit-Remaining": remaining.toString(),
+  }
+
+  if(!success) {
+    return NextResponse.json({
+      success: false,
+      issues: ["Rate limit exceeded"]
+    }, {
+      status: 429,
+      headers: rateLimitHeaders
+    })
+  }
+
   try {
     const { longUrl } = urlSchema.parse(body)
 
     const shortUrl = await createShortUrlMapping(longUrl)
+    
 
     return NextResponse.json({
       success: true,
       short: `${getAbsoluteUrl()}/${shortUrl}`,
     }, {
-      status: 200
+      status: 200,
+      headers: rateLimitHeaders
     })
 
   } catch (error) {
@@ -62,7 +93,8 @@ export async function POST(req: NextRequest): Promise<PostResult> {
         success: false,
         issues: error.issues.map(issue => issue.message),
       }, {
-        status: 400
+        status: 400,
+        headers: rateLimitHeaders
       })
     }
   }
