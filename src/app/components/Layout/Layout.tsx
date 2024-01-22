@@ -18,7 +18,7 @@ const projects = [
   { name: 'Make a choice', description: 'To help you make a choice', href: '/projects/make-a-choice' },
   { name: 'Draw', description: 'Draw something beautiful', href: '/projects/draw' },
   { name: 'Chat app', description: 'Chat app with websockets', href: '/projects/chat' },
-  { name: 'Url shortener', description: 'Url shortener with custom urls', href: '/projects/url-shortener' },
+  { name: 'Url shortener + api', description: 'Url shortener + api endpoint', href: '/projects/url-shortener' },
 ]
 
 const dropdowns = [

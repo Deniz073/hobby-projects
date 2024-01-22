@@ -50,9 +50,11 @@ export async function POST(req: NextRequest): Promise<PostResult> {
     token: process.env.UPSTASH_REDIS_REST_TOKEN!,
   })
 
+  const RATE_LIMIT_TOKENS = bearerToken === process.env.API_KEY ? 1000 : 10
+
   const ratelimit = new Ratelimit({
     redis: redis,
-    limiter: Ratelimit.fixedWindow(10, "10 s"),
+    limiter: Ratelimit.fixedWindow(RATE_LIMIT_TOKENS, "60 s"),
   });
 
   const { success, remaining, limit } = await ratelimit.limit(bearerToken);
@@ -82,7 +84,7 @@ export async function POST(req: NextRequest): Promise<PostResult> {
       success: true,
       short: `${getAbsoluteUrl()}/${shortUrl}`,
     }, {
-      status: 200,
+      status: 201,
       headers: rateLimitHeaders
     })
 
